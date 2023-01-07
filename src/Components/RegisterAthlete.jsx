@@ -47,7 +47,7 @@ export default function Register() {
           />
 
           <Form.Select id="blood_type_id">
-            <option>blood type id</option>
+            <option>choose your blood type</option>
             <option value={1}>O+</option>
             <option value={2}>O-</option>
             <option value={3}>B+</option>

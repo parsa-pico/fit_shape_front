@@ -15,8 +15,8 @@ export default function Register() {
       setGenericError(null);
 
       window.localStorage.setItem("token", data);
-      alert("logged in");
-      //   window.location = "/";
+
+      window.location = "/dashboard";
     } catch (error) {
       console.log(error);
       setGenericError(error.response.data);

@@ -26,7 +26,7 @@ export function Input({
   ...rest
 }) {
   return (
-    <>
+    <span className="my-input">
       {!placeholder && <label htmlFor={id}>{id}</label>}
       <input
         id={id}
@@ -40,6 +40,6 @@ export function Input({
           <b>{error}</b>
         </div>
       )}
-    </>
+    </span>
   );
 }
