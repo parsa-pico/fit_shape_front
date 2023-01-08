@@ -26,6 +26,18 @@ a {
 .my-input {
   text-align: start;
 }
+.select {
+  margin: 2rem 0;
+}
+.hidden {
+  transition: all 3s;
+  visibility: hidden;
+  opacity: 0;
+}
+.visibale {
+  visibility: visible;
+  opacity: 1;
+}
 /* typography */
 h1,
 h2,
@@ -117,4 +129,17 @@ h5 {
 
   color: white;
   text-decoration: none;
+}
+/* call back */
+.verify-callback {
+  background-color: #0c0c0c;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.verify-callback__btn {
+  padding: 0.5rem 3rem;
+  font-size: 2rem;
 }

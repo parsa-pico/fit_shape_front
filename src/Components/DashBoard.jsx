@@ -9,6 +9,7 @@ import SportHistory from "./Dashboard/Athlete/SportHistory";
 import SportHistoryForm from "./Dashboard/Athlete/SportHistoryForm";
 import WeightHistory from "./Dashboard/Athlete/WeightHistory";
 import Sub from "./Dashboard/Athlete/Sub";
+import SubForm from "./Dashboard/Athlete/SubForm";
 
 export default function DashBoard() {
   const user = jwtDecode(localStorage.getItem("token"));
@@ -24,6 +25,7 @@ export default function DashBoard() {
           <Route path="/sport_history/:id" element={<SportHistoryForm />} />
           <Route path="/weight_history" element={<WeightHistory />} />
           <Route path="/sub" element={<Sub />} />
+          <Route path="/sub/new" element={<SubForm />} />
         </Route>
       </Routes>
     );

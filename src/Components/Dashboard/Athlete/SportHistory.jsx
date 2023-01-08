@@ -28,12 +28,6 @@ export default function SportHistory() {
   }
   return (
     <div className="container">
-      <button
-        onClick={() => navigate("/dashboard/sport_history/new")}
-        className="btn btn-primary"
-      >
-        add
-      </button>
       <Table hover>
         <thead>
           <tr>
@@ -79,6 +73,13 @@ export default function SportHistory() {
           })}
         </tbody>
       </Table>
+      <button
+        onClick={() => navigate("/dashboard/sport_history/new")}
+        className="btn btn-primary "
+        style={{ padding: "0.3rem 2rem" }}
+      >
+        add
+      </button>
     </div>
   );
 }

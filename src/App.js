@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import RegisterAthlete from "./Components/RegisterAthlete";
 import LoginAthlete from "./Components/LoginAthlete";
 import DashBoard from "./Components/DashBoard";
+import PaymentVerification from "./Components/PaymentVerification";
 
 function App() {
   return (
@@ -12,6 +13,10 @@ function App() {
         <Route path="/register/athlete" element={<RegisterAthlete />} />
         <Route path="/login/athlete" element={<LoginAthlete />} />
         <Route path="/dashboard/*" element={<DashBoard />}></Route>
+        <Route
+          path="/callback/verify_payment"
+          element={<PaymentVerification />}
+        ></Route>
       </Routes>
     </div>
   );

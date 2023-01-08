@@ -6,7 +6,6 @@ import httpService from "../../../Services.js/httpService";
 import { Input } from "../../Common/Inputs";
 
 export default function WeightHistory() {
-  const navigate = useNavigate();
   const [rows, setRows] = useState([]);
   const [addRow, setAddRow] = useState(false);
   const [newRow, setNewRow] = useState({});
@@ -40,12 +39,6 @@ export default function WeightHistory() {
   }
   return (
     <div className="container">
-      {/* <button
-        onClick={() => navigate("/dashboard/sport_history/new")}
-        className="btn btn-primary"
-      >
-        add
-      </button> */}
       <Table hover>
         <thead>
           <tr>

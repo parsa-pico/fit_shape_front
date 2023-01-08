@@ -14,6 +14,9 @@ export default function AthleteNav() {
         <li className="dashboard__link">
           <Link to={"/dashboard/weight_history"}>weight history</Link>
         </li>
+        <li className="dashboard__link">
+          <Link to={"/dashboard/sub"}>subscriptions</Link>
+        </li>
       </ul>
     </div>
   );
