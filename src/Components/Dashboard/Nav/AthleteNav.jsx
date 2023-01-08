@@ -12,7 +12,7 @@ export default function AthleteNav() {
           <Link to={"/dashboard/sport_history"}>sport histories</Link>
         </li>
         <li className="dashboard__link">
-          <Link to={"/dashboard/profile"}>my profile</Link>
+          <Link to={"/dashboard/weight_history"}>weight history</Link>
         </li>
       </ul>
     </div>
