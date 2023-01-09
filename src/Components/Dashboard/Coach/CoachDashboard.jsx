@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import CoachNav from "../Nav/CoachNav";
+import CoachNav from "./../Nav/CoachNav";
 
 export default function CoachDashboard() {
   return (

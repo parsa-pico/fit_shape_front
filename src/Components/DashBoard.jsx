@@ -7,6 +7,6 @@ import CoachRouter from "./Dashboard/Coach/CoachRouter";
 export default function DashBoardRouter() {
   const user = jwtDecode(localStorage.getItem("token"));
   if (user.athlete_id) return <AthleteRouter athlete={user} />;
-  else if (user.job_position_id == 2) return <CoachRouter />;
+  else if (user.job_position_id == 2) return <CoachRouter staff={user} />;
   // .... add other dashboards
 }

@@ -8,6 +8,9 @@ export default function CoachNav() {
         <li className="dashboard__link">
           <Link to={"/dashboard/profile"}>my profile</Link>
         </li>
+        <li className="dashboard__link">
+          <Link to={"/dashboard/coach_plan"}>my plans</Link>
+        </li>
       </ul>
     </div>
   );

@@ -12,6 +12,7 @@ export default function SubForm() {
   const [genericError, setGenericError] = useState(null);
   const [paymentAmount, setPaymentAmount] = useState();
   const [errors, setErrors] = useState({});
+  const [disableBtn, setDisableBtn] = useState(false);
   useEffect(() => {
     async function onMount() {
       const { data: coachRows } = await httpService.get(
@@ -38,6 +39,7 @@ export default function SubForm() {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setDisableBtn(true);
     try {
       if (sub.coach_id === "" || sub.sub_type_id == 1) delete sub.coach_id;
       const { data } = await httpService.post("/sub", sub, authHeader);
@@ -46,6 +48,7 @@ export default function SubForm() {
     } catch (error) {
       console.log(error);
       setGenericError(error.response.data);
+      setDisableBtn(false);
     }
   };
 
@@ -100,7 +103,9 @@ export default function SubForm() {
             {paymentAmount} RIAL
           </h4>
         )}
-        <button className="btn btn-primary m-3">save and pay</button>
+        <button disabled={disableBtn} className="btn btn-primary m-3">
+          save and pay
+        </button>
       </form>
     </div>
   );

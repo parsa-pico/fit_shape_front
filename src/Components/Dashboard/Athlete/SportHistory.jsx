@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { authHeader } from "../../../Services.js/authService";
 import httpService from "../../../Services.js/httpService";
-
+import Button from "react-bootstrap/Button";
+import Overlay from "react-bootstrap/Overlay";
 export default function SportHistory() {
+  const [showDescription, setShowDescription] = useState(false);
+  const target = useRef(null);
   const navigate = useNavigate();
   const [rows, setRows] = useState([]);
   useEffect(() => {
@@ -46,7 +49,9 @@ export default function SportHistory() {
                 <td>{index + 1}</td>
                 <td>{row.sport}</td>
                 <td>{row.spent_years}</td>
-                <td>{row.description}</td>
+                <td className="sport-history__description">
+                  {row.description}
+                </td>
                 <td>
                   <button
                     onClick={() =>

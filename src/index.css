@@ -38,7 +38,14 @@ a {
   visibility: visible;
   opacity: 1;
 }
-
+.no-border {
+  border: none;
+}
+.no-border:hover,
+.no-border:focus {
+  border: none;
+  box-shadow: none;
+}
 /* typography */
 h1,
 h2,
@@ -143,6 +150,10 @@ h5 {
 .verify-callback__btn {
   padding: 0.5rem 3rem;
   font-size: 2rem;
+}
+/* sport history */
+.sport-history__description {
+  max-width: 50vw;
 }
 /* sub */
 .sub-wrapper {

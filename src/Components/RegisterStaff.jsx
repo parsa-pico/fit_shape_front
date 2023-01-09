@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import httpService from "../Services.js/httpService";
 import { Input } from "./Common/Inputs";
-import Form from "react-bootstrap/Form";
-export default function RegisterAthlete() {
+
+export default function RegisterStaff() {
   const [user, setUser] = useState({});
   const [genericError, setGenericError] = useState("");
   const [errors, setErrors] = useState({});
@@ -12,9 +12,9 @@ export default function RegisterAthlete() {
 
     try {
       console.log(user);
-      const { data } = await httpService.post("/athlete/sign_up", user);
+      const { data } = await httpService.post("/staff/sign_up", user);
       alert("registerd");
-      window.location = "/login/athlete";
+      window.location = "/login/staff";
     } catch (error) {
       console.log(error);
       setGenericError(error.response.data);
@@ -31,7 +31,7 @@ export default function RegisterAthlete() {
   return (
     <div className="container register-page">
       <form className="register-form" onSubmit={handleSubmit}>
-        <h3>sign up</h3>
+        <h3>sign up for staff</h3>
         <div onChange={handleUserInfo} className="grid grid--1x2">
           <Input className="register-input" placeholder="email" id={"email"} />
           <Input
@@ -45,19 +45,6 @@ export default function RegisterAthlete() {
             placeholder="national code"
             id={"national_code"}
           />
-
-          <Form.Select id="blood_type_id">
-            <option>choose your blood type</option>
-            <option value={1}>O+</option>
-            <option value={2}>O-</option>
-            <option value={3}>B+</option>
-            <option value={4}>B-</option>
-            <option value={5}>A+</option>
-            <option value={6}>A-</option>
-            <option value={7}>AB+</option>
-            <option value={8}>AB-</option>
-          </Form.Select>
-
           <Input
             className="register-input"
             placeholder="phone number"
@@ -73,20 +60,8 @@ export default function RegisterAthlete() {
             placeholder="last name"
             id={"last_name"}
           />
-          <Input
-            className="register-input"
-            placeholder="hieght"
-            id={"height"}
-            type={"number"}
-          />
-          <Input
-            className="register-input"
-            placeholder="weight"
-            id={"weight"}
-            type="number"
-          />
-          <p></p>
           <h3>address</h3>
+          <span></span>
           <Input className="register-input" placeholder="city" id={"city"} />
           <Input
             className="register-input"
@@ -98,7 +73,6 @@ export default function RegisterAthlete() {
             className="register-input"
             placeholder="house number"
             id={"house_number"}
-            error={errors.house_number}
           />
         </div>
         {genericError && (

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import httpService from "../Services.js/httpService";
 import { Input } from "./Common/Inputs";
-import Form from "react-bootstrap/Form";
-export default function LoginAthlete() {
+
+export default function LoginStaff() {
   const [user, setUser] = useState({});
   const [genericError, setGenericError] = useState(null);
   const [errors, setErrors] = useState({});
@@ -11,9 +11,8 @@ export default function LoginAthlete() {
     e.preventDefault();
 
     try {
-      const { data } = await httpService.post("/athlete/login", user);
+      const { data } = await httpService.post("/staff/login", user);
       setGenericError(null);
-
       window.localStorage.setItem("token", data);
 
       window.location = "/dashboard";
@@ -33,7 +32,7 @@ export default function LoginAthlete() {
   return (
     <div className=" login-page">
       <form className="login-form" onSubmit={handleSubmit}>
-        <h3>sign in</h3>
+        <h3>sign in for staff</h3>
         <div onChange={handleUserInfo}>
           <Input className="login-input" placeholder="email" id={"email"} />
           <Input
