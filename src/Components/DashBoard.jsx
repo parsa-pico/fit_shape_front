@@ -1,34 +1,12 @@
 // import jwt from "jsonwebtoken";
 import jwtDecode from "jwt-decode";
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import AthleteDashboard from "./Dashboard/Athlete/AthleteDashboard";
-import AthleteProfile from "./Dashboard/Athlete/AthleteProfile";
-import CoachDashboard from "./Dashboard/Coach/CoachDashboard";
-import SportHistory from "./Dashboard/Athlete/SportHistory";
-import SportHistoryForm from "./Dashboard/Athlete/SportHistoryForm";
-import WeightHistory from "./Dashboard/Athlete/WeightHistory";
-import Sub from "./Dashboard/Athlete/Sub";
-import SubForm from "./Dashboard/Athlete/SubForm";
+import AthleteRouter from "./Dashboard/Athlete/AthleteRouter";
+import CoachRouter from "./Dashboard/Coach/CoachRouter";
 
-export default function DashBoard() {
+export default function DashBoardRouter() {
   const user = jwtDecode(localStorage.getItem("token"));
-  if (user.athlete_id)
-    return (
-      <Routes>
-        <Route path="/" element={<AthleteDashboard />}>
-          <Route path="/profile" element={<AthleteProfile athlete={user} />} />
-          <Route
-            path="/sport_history"
-            element={<SportHistory athlete={user} />}
-          />
-          <Route path="/sport_history/:id" element={<SportHistoryForm />} />
-          <Route path="/weight_history" element={<WeightHistory />} />
-          <Route path="/sub" element={<Sub />} />
-          <Route path="/sub/new" element={<SubForm />} />
-        </Route>
-      </Routes>
-    );
-  else if (user.job_position_id == 2) return <CoachDashboard />;
+  if (user.athlete_id) return <AthleteRouter athlete={user} />;
+  else if (user.job_position_id == 2) return <CoachRouter />;
   // .... add other dashboards
 }

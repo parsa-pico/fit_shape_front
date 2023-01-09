@@ -38,6 +38,7 @@ a {
   visibility: visible;
   opacity: 1;
 }
+
 /* typography */
 h1,
 h2,
@@ -125,7 +126,7 @@ h5 {
 }
 .dashboard__link {
   margin: 2rem 1rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 
   color: white;
   text-decoration: none;
@@ -142,4 +143,34 @@ h5 {
 .verify-callback__btn {
   padding: 0.5rem 3rem;
   font-size: 2rem;
+}
+/* sub */
+.sub-wrapper {
+  width: 100%;
+
+  background-color: #0c0c0c;
+  color: white;
+}
+.sub {
+}
+.sub__plan {
+  color: darkorange;
+}
+.sub__plan:hover {
+  color: rgb(251, 191, 117);
+}
+.sub__closet-btn {
+  margin-left: 0.3rem;
+  font-size: 1rem;
+}
+/* sub plan */
+#sub-plan {
+  justify-content: start;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.sub-plan__accordion {
+  width: 50%;
+  margin: 0 auto;
 }
