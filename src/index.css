@@ -46,6 +46,22 @@ a {
   border: none;
   box-shadow: none;
 }
+.hyperlink {
+  color: darkorange;
+}
+.hyperlink:hover {
+  cursor: pointer;
+  color: rgb(255, 212, 160);
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.right-0 {
+  right: 0;
+}
 /* typography */
 h1,
 h2,
@@ -125,11 +141,14 @@ h5 {
   flex-direction: row;
 }
 .dashboard__nav {
-  background: url("./Components/Images/sidebar-light.png");
+  background-image: url("./Components/Images/sidebar-light.png");
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
   height: 100vh;
+}
+.dashboard__nav--green {
+  background-image: url("./Components/Images/sidebar-light-green.png");
 }
 .dashboard__link {
   margin: 2rem 1rem;
@@ -152,8 +171,24 @@ h5 {
   font-size: 2rem;
 }
 /* sport history */
+.sport-history__description-wrapper {
+  position: relative;
+}
 .sport-history__description {
-  max-width: 50vw;
+  z-index: 5;
+  position: absolute;
+  left: 0;
+}
+.sport-history__description-close {
+  position: absolute;
+  left: 90%;
+  top: -33%;
+  z-index: 6;
+}
+.sport-history__modal {
+  min-width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* sub */
 .sub-wrapper {

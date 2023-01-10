@@ -4,6 +4,7 @@ import { authHeader } from "../../../Services.js/authService";
 import httpService from "../../../Services.js/httpService";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
+import { Col, Row } from "react-bootstrap";
 export default function CoachPlan() {
   const navigate = useNavigate();
   const [rows, setRows] = useState([]);
@@ -66,6 +67,8 @@ export default function CoachPlan() {
           return (
             <Accordion.Item key={index} eventKey={index}>
               <Accordion.Header>
+                <span>#{row.coach_plan_id} &nbsp;</span>
+
                 {row.title}
                 <span style={{ marginLeft: "auto" }}>type:{row.type}</span>
               </Accordion.Header>
