@@ -62,6 +62,18 @@ a {
 .right-0 {
   right: 0;
 }
+.right-1 {
+  right: 1rem;
+}
+.down-0 {
+  bottom: 0;
+}
+.down-1 {
+  bottom: 1rem;
+}
+.underline {
+  text-decoration: underline;
+}
 /* typography */
 h1,
 h2,

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import httpService from "../Services.js/httpService";
 import { Input } from "./Common/Inputs";
 
@@ -34,20 +35,23 @@ export default function LoginStaff() {
       <form className="login-form" onSubmit={handleSubmit}>
         <h3>sign in for staff</h3>
         <div onChange={handleUserInfo}>
-          <Input className="login-input" placeholder="email" id={"email"} />
+          <Input className="login-input " placeholder="email" id={"email"} />
           <Input
-            className="login-input"
+            className="login-input mb-1"
             placeholder="password"
             type="password"
             id={"password"}
           />
+          <Link to={"/register/staff"} className="underline">
+            <small>got hired and ready to work? register here</small>
+          </Link>
         </div>
         {genericError && (
           <div className="alert alert-danger">
             <b>{genericError}</b>
           </div>
         )}
-        <button className="btn btn-primary m2">login</button>
+        <button className="btn btn-primary m-3">login</button>
       </form>
     </div>
   );

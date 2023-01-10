@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import RegisterAthlete from "./Components/RegisterAthlete";
 import LoginAthlete from "./Components/LoginAthlete";
 import DashBoard from "./Components/DashBoard";
@@ -13,6 +13,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="/" element={<Navigate to={"/login/athlete"} />} />
         <Route path="/register/athlete" element={<RegisterAthlete />} />
         <Route path="/register/staff" element={<RegisterStaff />} />
         <Route path="/login/athlete" element={<LoginAthlete />} />

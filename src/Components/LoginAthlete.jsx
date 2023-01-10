@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import httpService from "../Services.js/httpService";
 import { Input } from "./Common/Inputs";
 import Form from "react-bootstrap/Form";
+import { Link, useNavigate } from "react-router-dom";
 export default function LoginAthlete() {
+  const navigate = useNavigate();
   const [user, setUser] = useState({});
   const [genericError, setGenericError] = useState(null);
   const [errors, setErrors] = useState({});
@@ -31,24 +33,33 @@ export default function LoginAthlete() {
     }));
   }
   return (
-    <div className=" login-page">
-      <form className="login-form" onSubmit={handleSubmit}>
+    <div className="login-page">
+      <form className="login-form  relative" onSubmit={handleSubmit}>
         <h3>sign in</h3>
         <div onChange={handleUserInfo}>
           <Input className="login-input" placeholder="email" id={"email"} />
           <Input
-            className="login-input"
+            className="login-input mb-1"
             placeholder="password"
             type="password"
             id={"password"}
           />
+          <Link to={"/register/athlete"} className="underline">
+            <small>new to fit shape? register here</small>
+          </Link>
         </div>
         {genericError && (
           <div className="alert alert-danger">
             <b>{genericError}</b>
           </div>
         )}
-        <button className="btn btn-primary m2">login</button>
+        <button className="btn btn-primary m-3">login</button>
+        <small
+          onClick={() => navigate("/login/staff")}
+          className="absolute right-1 down-1 hyperlink"
+        >
+          login staff
+        </small>
       </form>
     </div>
   );
