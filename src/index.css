@@ -34,6 +34,11 @@ a {
   visibility: hidden;
   opacity: 0;
 }
+.hidden--0-5s {
+  transition: all 0.5s;
+  visibility: hidden;
+  opacity: 0;
+}
 .visibale {
   visibility: visible;
   opacity: 1;
@@ -241,4 +246,21 @@ h5 {
 .sub-plan__accordion {
   width: 50%;
   margin: 0 auto;
+}
+/* submit entrance */
+.submit-entrance {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.submit-entrance__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* secretary athlete */
+.secretary__rfid-btn {
+  width: 10%;
 }

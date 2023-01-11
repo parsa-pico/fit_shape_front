@@ -10,7 +10,7 @@ export default function AthleteProfile({ athlete }) {
   const [genericError, setGenericError] = useState(null);
   const [errors, setErrors] = useState({});
   useEffect(() => {
-    const { athlete_id, rfid_tag, iat, email, ...rest } = athlete;
+    const { athlete_id, rfid_tag, iat, email, is_in_gym, ...rest } = athlete;
     setUser({ ...rest });
   }, []);
   const handleSubmit = async (e) => {
