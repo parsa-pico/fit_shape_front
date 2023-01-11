@@ -66,11 +66,12 @@ export default function CoachPlan() {
             !isEditMode || (isEditMode && editPlanId != row.coach_plan_id);
           return (
             <Accordion.Item key={index} eventKey={index}>
-              <Accordion.Header>
-                <span>#{row.coach_plan_id} &nbsp;</span>
-
-                {row.title}
-                <span style={{ marginLeft: "auto" }}>type:{row.type}</span>
+              <Accordion.Header className="relative">
+                <span>
+                  <span>#{row.coach_plan_id} &nbsp;</span>
+                  {row.title}
+                </span>
+                <span className="absolute right-4">type:{row.type}</span>
               </Accordion.Header>
               <Accordion.Body style={{ position: "relative" }}>
                 {editCondition && (

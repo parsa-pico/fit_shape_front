@@ -38,8 +38,8 @@ export default function WeightHistory() {
     }
   }
   return (
-    <div className="container">
-      <Table hover>
+    <div className="black-mode-wrapper">
+      <Table variant="dark" hover>
         <thead>
           <tr>
             <th>#</th>
@@ -89,7 +89,7 @@ export default function WeightHistory() {
               </td>
               <td>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary "
                   onClick={() => {
                     handleAdd();
                   }}
@@ -102,7 +102,7 @@ export default function WeightHistory() {
         </tbody>
       </Table>
       {!addRow && (
-        <button onClick={() => setAddRow(true)} className="btn btn-info ">
+        <button onClick={() => setAddRow(true)} className="btn btn-info m-4 ">
           +
         </button>
       )}

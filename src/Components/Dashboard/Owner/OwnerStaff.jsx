@@ -46,8 +46,8 @@ export default function OwnerStaff() {
     setUpdateRows(updateRowsCopy);
   }
   return (
-    <div className="container">
-      <Table hover>
+    <div className="black-mode-wrapper">
+      <Table variant="dark" hover>
         <thead>
           <tr>
             <th>#</th>
@@ -60,6 +60,7 @@ export default function OwnerStaff() {
             <th>street </th>
             <th>alley </th>
             <th>house number </th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -96,7 +97,9 @@ export default function OwnerStaff() {
           })}
         </tbody>
       </Table>
-      <Button onClick={() => submitChange()}>Save</Button>
+      <Button className="m-4" onClick={() => submitChange()}>
+        Save
+      </Button>
     </div>
   );
 }

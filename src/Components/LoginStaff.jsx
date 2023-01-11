@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import httpService from "../Services.js/httpService";
 import { Input } from "./Common/Inputs";
 
 export default function LoginStaff() {
+  const navigate = useNavigate();
   const [user, setUser] = useState({});
   const [genericError, setGenericError] = useState(null);
   const [errors, setErrors] = useState({});
@@ -32,7 +33,7 @@ export default function LoginStaff() {
   }
   return (
     <div className=" login-page">
-      <form className="login-form" onSubmit={handleSubmit}>
+      <form className="login-form relative" onSubmit={handleSubmit}>
         <h3>sign in for staff</h3>
         <div onChange={handleUserInfo}>
           <Input className="login-input " placeholder="email" id={"email"} />
@@ -52,6 +53,12 @@ export default function LoginStaff() {
           </div>
         )}
         <button className="btn btn-primary m-3">login</button>
+        <small
+          onClick={() => navigate("/login/athlete")}
+          className="absolute right-1 down-1 hyperlink"
+        >
+          login athlete
+        </small>
       </form>
     </div>
   );

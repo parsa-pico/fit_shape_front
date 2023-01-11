@@ -31,8 +31,8 @@ export default function SportHistory() {
     }
   }
   return (
-    <div className="container">
-      <Table hover>
+    <div className="black-mode-wrapper">
+      <Table variant="dark" hover>
         <thead>
           <tr>
             <th>#</th>
@@ -102,7 +102,7 @@ export default function SportHistory() {
       </Table>
       <button
         onClick={() => navigate("/dashboard/sport_history/new")}
-        className="btn btn-primary "
+        className="btn btn-primary m-4 "
         style={{ padding: "0.3rem 2rem" }}
       >
         add

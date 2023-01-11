@@ -45,6 +45,7 @@ export default function AssignedPlansModal({
       <Modal
         dialogClassName="sport-history__modal"
         show={show}
+        size="lg"
         onHide={() => setShow(false)}
       >
         <Modal.Header closeButton>

@@ -29,7 +29,7 @@ export default function Sub() {
     else window.location = "/dashboard/sub";
   }
   return (
-    <div className="sub-wrapper">
+    <div className="black-mode-wrapper">
       <div className="sub">
         <Table variant="dark" hover>
           <thead>
@@ -88,8 +88,7 @@ export default function Sub() {
           onClick={() => {
             navigate("new");
           }}
-          style={{ marginLeft: "1 rem" }}
-          className="btn btn-primary "
+          className="btn btn-primary m-4 "
         >
           add new sub
         </button>
