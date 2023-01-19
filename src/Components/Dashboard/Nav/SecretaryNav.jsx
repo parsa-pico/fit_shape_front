@@ -14,11 +14,15 @@ export default function SecretaryNav() {
         <li className="dashboard__link">
           <Link to={"/dashboard/profile"}>my profile</Link>
         </li>
-        <li className="dashboard__link">
-          <Link to={"/dashboard/submit_entrance"}>submit entrance</Link>
-        </li>
+
         <li className="dashboard__link">
           <Link to={"/dashboard/athlete"}>athletes</Link>
+        </li>
+        <li className="dashboard__link">
+          <Link to={"/dashboard/entrance"}>view entrances</Link>
+        </li>
+        <li className="dashboard__link">
+          <Link to={"/dashboard/submit_entrance"}>submit entrance</Link>
         </li>
       </ul>
     </div>

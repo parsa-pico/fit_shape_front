@@ -11,6 +11,7 @@ export default function AssignedPlansModal({
   show,
   setShow,
   rows,
+  isActiveSub,
 }) {
   const [newPlanId, setNewPlanId] = useState();
   async function handleAdd() {
@@ -60,25 +61,29 @@ export default function AssignedPlansModal({
                 </Accordion.Header>
                 <Accordion.Body className="relative">
                   {row.description}
-                  <Button
-                    onClick={() => handleDelete(row.coach_plan_id)}
-                    className="absolute right-0"
-                    variant="danger"
-                  >
-                    delete
-                  </Button>
+                  {isActiveSub && (
+                    <Button
+                      onClick={() => handleDelete(row.coach_plan_id)}
+                      className="absolute right-0"
+                      variant="danger"
+                    >
+                      delete
+                    </Button>
+                  )}
                 </Accordion.Body>
               </Accordion.Item>
             ))}
           </Accordion>
 
-          <Modal.Footer>
-            <Input
-              onChange={({ target }) => setNewPlanId(target.value)}
-              placeholder={"plan id"}
-            />
-            <Button onClick={() => handleAdd()}>add new plan</Button>
-          </Modal.Footer>
+          {isActiveSub && (
+            <Modal.Footer>
+              <Input
+                onChange={({ target }) => setNewPlanId(target.value)}
+                placeholder={"plan id"}
+              />
+              <Button onClick={() => handleAdd()}>add new plan</Button>
+            </Modal.Footer>
+          )}
         </Modal.Body>
       </Modal>
     </div>

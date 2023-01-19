@@ -16,6 +16,7 @@ export default function AssignedSub() {
   const [ahleteSportHIstory, setAhleteSportHIstory] = useState([]);
   const [showSportHistory, SetShowSportHistory] = useState(false);
   const [subId, setSubId] = useState();
+  const [isActiveSub, setIsActiveSub] = useState();
   const [subPlan, setSubPlan] = useState([]);
   const [showSubPlans, SetShowSubPlans] = useState(false);
   const [rows, setRows] = useState([]);
@@ -26,6 +27,7 @@ export default function AssignedSub() {
           "/coach/assigned_subs/100/1",
           authHeader
         );
+        console.log(data);
         setRows(data);
       } catch (error) {
         if (error.response) alert(error.response.data);
@@ -80,6 +82,7 @@ export default function AssignedSub() {
         rows={subPlan}
         title={athleteName}
         subId={subId}
+        isActiveSub={isActiveSub}
       />
       <div>
         <Table hover>
@@ -94,8 +97,11 @@ export default function AssignedSub() {
           </thead>
           <tbody>
             {rows.map((row, index) => {
+              const rowClass = row.remaning_days
+                ? "table-info"
+                : "table-warning";
               return (
-                <tr key={index}>
+                <tr className={rowClass} key={index}>
                   <td>{index + 1}</td>
                   <td>{row.first_name}</td>
                   <td>{row.last_name}</td>
@@ -132,6 +138,10 @@ export default function AssignedSub() {
                         await getAssignedPlan(row.sub_id);
                         SetShowSubPlans(!showSubPlans);
                         setAthleteName(row.first_name + " " + row.last_name);
+                        row.remaning_days
+                          ? setIsActiveSub(true)
+                          : setIsActiveSub(false);
+
                         setSubId(row.sub_id);
                       }
                       onClick();

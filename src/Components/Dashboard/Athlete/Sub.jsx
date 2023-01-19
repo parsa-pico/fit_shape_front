@@ -28,6 +28,11 @@ export default function Sub() {
       return alert("there is no free closet right now");
     else window.location = "/dashboard/sub";
   }
+  function getRowClass(row) {
+    if (!row.is_payed) return "table-danger";
+    if (!row.remaning_days) return "table-info";
+    return "table-success";
+  }
   return (
     <div className="black-mode-wrapper">
       <div className="sub">
@@ -47,14 +52,11 @@ export default function Sub() {
           <tbody>
             {rows.map((row, index) => {
               let canAssignCloset = false;
-              let activeSub = row.remaning_days && row.is_payed ? true : false;
-              let rowStyle = activeSub
-                ? { ["--bs-table-bg"]: "rgb(24 94 69)" }
-                : {};
+              let rowClass = getRowClass(row);
               if (!row.closet_number && row.remaning_days && row.is_payed == 1)
                 canAssignCloset = true;
               return (
-                <tr style={rowStyle} key={index}>
+                <tr className={rowClass} key={index}>
                   <td>{index + 1}</td>
                   <td>{row.sub_type_id == 1 ? "normal" : "gold"}</td>
                   <td>
@@ -73,7 +75,7 @@ export default function Sub() {
                   <td>{row.is_payed ? "yes" : "no"}</td>
                   <td>{row.coach_id ? row.coach_full_name : "not assigned"}</td>
                   <td>
-                    {row.sub_type_id == 2 && (
+                    {row.sub_type_id === 2 && row.is_payed === 1 && (
                       <Link className="sub__plan" to={`sub_plan/${row.sub_id}`}>
                         view coach plans
                       </Link>

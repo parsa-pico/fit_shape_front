@@ -8,6 +8,7 @@ import PaymentVerification from "./Components/PaymentVerification";
 import DashBoardRouter from "./Components/DashBoard";
 import RegisterStaff from "./Components/RegisterStaff";
 import LoginStaff from "./Components/LoginStaff";
+import AthleteVerification from "./Components/AthleteVerification";
 
 function App() {
   return (
@@ -22,7 +23,11 @@ function App() {
         <Route
           path="/callback/verify_payment"
           element={<PaymentVerification />}
-        ></Route>
+        />
+        <Route
+          path="/callback/verify_athlete"
+          element={<AthleteVerification />}
+        />
       </Routes>
     </div>
   );

@@ -29,10 +29,11 @@ export default function SecretaryAthlete() {
     onMount();
   }, []);
   async function handleEdit() {
+    console.log(typeof editRfidTag);
     try {
       await httpService.put(
         `/secretary/athlete/${editAthleteId}`,
-        { rfid_tag: editRfidTag.trim() },
+        { rfid_tag: editRfidTag },
         authHeader
       );
       window.location = "/dashboard/athlete";
@@ -83,7 +84,7 @@ export default function SecretaryAthlete() {
                         blood_type_id: getBloodType(row.blood_type_id),
                         height: row.height,
                         city: row.city,
-                        street: row.stret,
+                        street: row.street,
                         alley: row.alley,
                         house_number: row.house_number,
                       });
@@ -108,12 +109,11 @@ export default function SecretaryAthlete() {
                             color: "white",
                             resize: "none",
                           }}
+                          defaultValue={row.rfid_tag}
                           className="form-contorl no-border "
                           cols="25"
                           rows="1"
-                        >
-                          {row.rfid_tag}
-                        </textarea>
+                        />
                       </td>
                       <td></td>
                     </>
@@ -126,7 +126,8 @@ export default function SecretaryAthlete() {
                             if (e.key === "Enter") handleEdit();
                           }}
                           onChange={({ target }) => {
-                            setEditRfidTag(target.value);
+                            if (target.value === "") setEditRfidTag(null);
+                            else setEditRfidTag(target.value.trim());
                           }}
                           value={editRfidTag}
                           style={{

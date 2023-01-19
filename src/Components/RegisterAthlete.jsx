@@ -13,7 +13,7 @@ export default function RegisterAthlete() {
     try {
       console.log(user);
       const { data } = await httpService.post("/athlete/sign_up", user);
-      alert("registerd");
+      alert("registerd,please check your email");
       window.location = "/login/athlete";
     } catch (error) {
       console.log(error);
