@@ -17,6 +17,21 @@ export function RadioButton({ id, name, label, error, ...rest }) {
     </div>
   );
 }
+export function checkBox({ id, className, ...rest }) {
+  return (
+    <div class="form-check">
+      <input
+        className={"form-check-input" + className}
+        type="checkbox"
+        {...rest}
+        id={id}
+      />
+      <label class="form-check-label" for={id}>
+        id
+      </label>
+    </div>
+  );
+}
 export function Input({
   id,
   placeholder,

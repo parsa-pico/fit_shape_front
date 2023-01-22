@@ -24,6 +24,9 @@ export default function SecretaryNav() {
         <li className="dashboard__link">
           <Link to={"/dashboard/submit_entrance"}>submit entrance</Link>
         </li>
+        <li className="dashboard__link">
+          <Link to={"/dashboard/notify"}>notify</Link>
+        </li>
       </ul>
     </div>
   );

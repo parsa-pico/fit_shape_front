@@ -29,7 +29,6 @@ export default function SecretaryAthlete() {
     onMount();
   }, []);
   async function handleEdit() {
-    console.log(typeof editRfidTag);
     try {
       await httpService.put(
         `/secretary/athlete/${editAthleteId}`,
