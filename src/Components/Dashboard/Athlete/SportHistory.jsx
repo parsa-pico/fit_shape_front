@@ -27,7 +27,7 @@ export default function SportHistory() {
       window.location = "/dashboard/sport_history";
     } catch (e) {
       if (e && e.response) alert(e.response.data);
-      alert(e.message);
+      else alert(e.message);
     }
   }
   return (

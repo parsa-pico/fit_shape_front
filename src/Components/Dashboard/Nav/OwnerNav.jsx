@@ -20,6 +20,9 @@ export default function OwnerNav() {
         <li className="dashboard__link">
           <Link to={"/dashboard/payment"}>payments</Link>
         </li>
+        <li className="dashboard__link">
+          <Link to={"/dashboard/sub_types"}>sub types</Link>
+        </li>
       </ul>
     </div>
   );
