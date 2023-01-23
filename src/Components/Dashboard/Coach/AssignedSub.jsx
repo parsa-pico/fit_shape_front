@@ -8,6 +8,7 @@ import AthleteDetailsModal from "./AthleteDetailsModal";
 import { getBloodType } from "./../../Common/commonFuncs";
 import SportHistoryModal from "./SportHistoryModal";
 import AssignedPlansModal from "./AssignedPlansModal";
+import WeightHistoryModal from "./WeightHistoryModal";
 
 export default function AssignedSub() {
   const [athleteName, setAthleteName] = useState("");
@@ -15,6 +16,8 @@ export default function AssignedSub() {
   const [showAthleteDetails, SetShowAthleteDetails] = useState(false);
   const [ahleteSportHIstory, setAhleteSportHIstory] = useState([]);
   const [showSportHistory, SetShowSportHistory] = useState(false);
+  const [ahleteWeightHistory, setAhleteWeightHistory] = useState([]);
+  const [showWeightHistory, SetShowWeightHistory] = useState(false);
   const [subId, setSubId] = useState();
   const [isActiveSub, setIsActiveSub] = useState();
   const [subPlan, setSubPlan] = useState([]);
@@ -42,7 +45,20 @@ export default function AssignedSub() {
         `/coach/athlete_sport_history/${athleteId}/100/1`,
         authHeader
       );
+      console.log(data);
       setAhleteSportHIstory(data);
+    } catch (error) {
+      if (error.response) alert(error.response.data);
+      else alert(error.message);
+    }
+  }
+  async function getWeightHistory(athleteId) {
+    try {
+      const { data } = await httpService.get(
+        `/coach/athlete_weight/${athleteId}/100/1`,
+        authHeader
+      );
+      setAhleteWeightHistory(data);
     } catch (error) {
       if (error.response) alert(error.response.data);
       else alert(error.message);
@@ -54,7 +70,7 @@ export default function AssignedSub() {
         `/coach/sub_plan/${subId}/100/1`,
         authHeader
       );
-      console.log(data);
+
       setSubPlan(data);
     } catch (error) {
       if (error.response) alert(error.response.data);
@@ -75,6 +91,12 @@ export default function AssignedSub() {
         show={showSportHistory}
         setShow={SetShowSportHistory}
         rows={ahleteSportHIstory}
+      />
+      <WeightHistoryModal
+        title={athleteName}
+        show={showWeightHistory}
+        setShow={SetShowWeightHistory}
+        rows={ahleteWeightHistory}
       />
       <AssignedPlansModal
         show={showSubPlans}
@@ -131,6 +153,19 @@ export default function AssignedSub() {
                     className="hyperlink"
                   >
                     view sport history
+                  </td>
+                  <td
+                    onClick={() => {
+                      async function onClick() {
+                        await getWeightHistory(row.athlete_id);
+                        SetShowWeightHistory(!showWeightHistory);
+                        setAthleteName(row.first_name + " " + row.last_name);
+                      }
+                      onClick();
+                    }}
+                    className="hyperlink"
+                  >
+                    view weight history
                   </td>
                   <td
                     onClick={() => {
