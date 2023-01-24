@@ -1,29 +1,56 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Table } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Pagination, Table } from "react-bootstrap";
 import { authHeader } from "../../../Services.js/authService";
 import httpService from "../../../Services.js/httpService";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { Input } from "./../../Common/Inputs";
 
 export default function OwnerStaff() {
+  const pageLimit = 2;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState();
   const [rows, setRows] = useState([]);
+  const [searchObj, setSearchObj] = useState({});
   const [updateRows, setUpdateRows] = useState([]);
+  const [paginationItems, setPaginationItems] = useState([]);
   useEffect(() => {
     async function onMount() {
-      const { data } = await httpService.get("/owner/staff/100/1", authHeader);
-      setRows(data);
+      const { data } = await httpService.post(
+        `/owner/staff/${pageLimit}/1`,
+        {},
+        authHeader
+      );
+      setTotalPages(data.totalPages);
+      setRows(data.rows);
     }
     onMount();
   }, []);
-  console.log(updateRows);
+  useEffect(() => {
+    const paginationArray = [];
+    for (let number = 1; number <= totalPages; number++) {
+      paginationArray.push(
+        <Pagination.Item
+          id={number}
+          onClick={(e) => handlePaginate(e)}
+          key={number}
+          active={number === currentPage}
+        >
+          {number}
+        </Pagination.Item>
+      );
+    }
+
+    setPaginationItems(paginationArray);
+  }, [totalPages, currentPage]);
   async function submitChange() {
     for (let value of updateRows) {
-      await handleChange(value.staff_id, value.job_position_id);
+      await handleChangeJobPosition(value.staff_id, value.job_position_id);
     }
     window.location = "/dashboard/staff";
   }
-  async function handleChange(staff_id, job_position_id) {
+  async function handleChangeJobPosition(staff_id, job_position_id) {
+    console.log(staff_id, job_position_id);
     try {
       await httpService.put(
         `/owner/staff/`,
@@ -45,8 +72,85 @@ export default function OwnerStaff() {
     } else updateRowsCopy.push({ staff_id, job_position_id });
     setUpdateRows(updateRowsCopy);
   }
+  function handleChangeSearch(target) {
+    const value = target.value.trim();
+    const searchObjCopy = { ...searchObj };
+    if (value === "") {
+      delete searchObjCopy[target.id];
+      setSearchObj(searchObjCopy);
+    } else
+      setSearchObj((prevState) => ({
+        ...prevState,
+        [target.id]: { like: true, value },
+      }));
+  }
+  async function handleSearch(e) {
+    e.preventDefault();
+    try {
+      const { data } = await httpService.post(
+        `/owner/staff/${pageLimit}/1`,
+        searchObj,
+        authHeader
+      );
+      setRows(data.rows);
+      setTotalPages(data.totalPages);
+    } catch (e) {
+      if (e && e.response) alert(e.response.data);
+      alert(e.message);
+    }
+  }
+  async function handlePaginate(e) {
+    setRows([]);
+    const page = e.target.id;
+
+    try {
+      const { data } = await httpService.post(
+        `/owner/staff/${pageLimit}/${page}`,
+        searchObj,
+        authHeader
+      );
+      setRows(data.rows);
+      setTotalPages(data.totalPages);
+      setCurrentPage(parseInt(page));
+    } catch (e) {
+      if (e && e.response) alert(e.response.data);
+      alert(e.message);
+    }
+  }
   return (
-    <div className="black-mode-wrapper">
+    <div className="black-mode-wrapper ">
+      <form onSubmit={(e) => handleSearch(e)}>
+        <div
+          onChange={({ target }) => handleChangeSearch(target)}
+          className="grid grid--1x5 m-2"
+        >
+          <Input
+            className="register-input"
+            // placeholder="first name"
+            id={"first_name"}
+          />
+          <Input
+            className="register-input"
+            // placeholder="last name"
+            id={"last_name"}
+          />
+          <Input
+            className="register-input"
+            // placeholder="national code"
+            id={"national_code"}
+          />
+          <Input
+            className="register-input"
+            // placeholder="phone number"
+            id={"phone_number"}
+          />
+          <Input className="register-input" id={"email"} />
+          <Input className="register-input" id={"city"} />
+          <Button type="submit" className="w-50 ">
+            search
+          </Button>
+        </div>
+      </form>
       <Table variant="dark" hover>
         <thead>
           <tr>
@@ -65,6 +169,7 @@ export default function OwnerStaff() {
         </thead>
         <tbody>
           {rows.map((row, index) => {
+            console.log(row.first_name, row.job_position_id);
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
@@ -100,6 +205,7 @@ export default function OwnerStaff() {
       <Button className="m-4" onClick={() => submitChange()}>
         Save
       </Button>
+      <Pagination>{paginationItems}</Pagination>
     </div>
   );
 }

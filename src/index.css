@@ -126,6 +126,14 @@ h5 {
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
+.grid--1x3 {
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+.grid--1x5 {
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+}
 /* register page */
 .register-page {
   display: flex;
