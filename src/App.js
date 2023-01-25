@@ -3,7 +3,6 @@ import "./App.css";
 import { Navigate, Route, Routes } from "react-router-dom";
 import RegisterAthlete from "./Components/RegisterAthlete";
 import LoginAthlete from "./Components/LoginAthlete";
-import DashBoard from "./Components/DashBoard";
 import PaymentVerification from "./Components/PaymentVerification";
 import DashBoardRouter from "./Components/DashBoard";
 import RegisterStaff from "./Components/RegisterStaff";
