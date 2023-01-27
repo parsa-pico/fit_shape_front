@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import httpService from "../Services.js/httpService";
 import { Input } from "./Common/Inputs";
 import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
 export default function RegisterAthlete() {
+  const navigate = useNavigate();
   const [user, setUser] = useState({});
   const [genericError, setGenericError] = useState("");
   const [errors, setErrors] = useState({});
@@ -11,12 +13,9 @@ export default function RegisterAthlete() {
     e.preventDefault();
 
     try {
-      console.log(user);
       const { data } = await httpService.post("/athlete/sign_up", user);
-      alert("registerd,please check your email");
-      window.location = "/login/athlete";
+      navigate(`/register/athlete/verify/${data.athlete_id}`);
     } catch (error) {
-      console.log(error);
       setGenericError(error.response.data);
     }
   };

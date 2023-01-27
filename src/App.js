@@ -8,6 +8,7 @@ import DashBoardRouter from "./Components/DashBoard";
 import RegisterStaff from "./Components/RegisterStaff";
 import LoginStaff from "./Components/LoginStaff";
 import AthleteVerification from "./Components/AthleteVerification";
+import AthleteAfterRegister from "./Components/AthleteAfterRegister";
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to={"/login/athlete"} />} />
         <Route path="/register/athlete" element={<RegisterAthlete />} />
+        <Route
+          path="/register/athlete/verify/:athlete_id"
+          element={<AthleteAfterRegister />}
+        />
         <Route path="/register/staff" element={<RegisterStaff />} />
         <Route path="/login/athlete" element={<LoginAthlete />} />
         <Route path="/login/staff" element={<LoginStaff />} />
