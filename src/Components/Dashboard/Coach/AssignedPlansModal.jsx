@@ -12,6 +12,7 @@ export default function AssignedPlansModal({
   setShow,
   rows,
   isActiveSub,
+  isStaff = true,
 }) {
   const [newPlanId, setNewPlanId] = useState();
   async function handleAdd() {
@@ -61,7 +62,7 @@ export default function AssignedPlansModal({
                 </Accordion.Header>
                 <Accordion.Body className="relative">
                   {row.description}
-                  {isActiveSub && (
+                  {isStaff && isActiveSub && (
                     <Button
                       onClick={() => handleDelete(row.coach_plan_id)}
                       className="absolute right-0"
@@ -75,7 +76,7 @@ export default function AssignedPlansModal({
             ))}
           </Accordion>
 
-          {isActiveSub && (
+          {isStaff && isActiveSub && (
             <Modal.Footer>
               <Input
                 onChange={({ target }) => setNewPlanId(target.value)}

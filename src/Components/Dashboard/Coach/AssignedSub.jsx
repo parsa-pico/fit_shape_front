@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Table } from "react-bootstrap";
+import { Button, Modal, Table } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import { authHeader } from "../../../Services.js/authService";
 import httpService from "../../../Services.js/httpService";
@@ -23,6 +23,8 @@ export default function AssignedSub() {
   const [subPlan, setSubPlan] = useState([]);
   const [showSubPlans, SetShowSubPlans] = useState(false);
   const [rows, setRows] = useState([]);
+  const [filterdRows, setFilterdRows] = useState([]);
+  const [showExpireBtn, setShowExpireBtn] = useState(true);
   useEffect(() => {
     async function onMount() {
       try {
@@ -32,6 +34,8 @@ export default function AssignedSub() {
         );
         console.log(data);
         setRows(data);
+        const filterd = data.filter((row) => row.remaning_days);
+        setFilterdRows(filterd);
       } catch (error) {
         if (error.response) alert(error.response.data);
         else alert(error.message);
@@ -115,13 +119,13 @@ export default function AssignedSub() {
               <th>last name</th>
               <th></th>
               <th></th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            {rows.map((row, index) => {
-              const rowClass = row.remaning_days
-                ? "table-info"
-                : "table-warning";
+            {filterdRows.map((row, index) => {
+              const rowClass = !row.remaning_days ? "table-warning" : "";
               return (
                 <tr className={rowClass} key={index}>
                   <td>{index + 1}</td>
@@ -190,6 +194,16 @@ export default function AssignedSub() {
             })}
           </tbody>
         </Table>
+        {showExpireBtn && (
+          <Button
+            onClick={() => {
+              setShowExpireBtn(false);
+              setFilterdRows(rows);
+            }}
+          >
+            show expired subs
+          </Button>
+        )}
       </div>
     </div>
   );

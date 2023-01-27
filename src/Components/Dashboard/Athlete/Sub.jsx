@@ -4,12 +4,13 @@ import { useNavigate, Link } from "react-router-dom";
 import { authHeader } from "../../../Services.js/authService";
 import httpService from "../../../Services.js/httpService";
 import { Input } from "../../Common/Inputs";
+import AssignedPlansModal from "../Coach/AssignedPlansModal";
 
 export default function Sub() {
   const navigate = useNavigate();
   const [rows, setRows] = useState([]);
-  const [addRow, setAddRow] = useState(false);
-  const [newRow, setNewRow] = useState({});
+  const [subPlan, setSubPlan] = useState([]);
+  const [showSubPlans, SetShowSubPlans] = useState(false);
   useEffect(() => {
     async function onMount() {
       const { data } = await httpService.get("/sub/100/1", authHeader);
@@ -33,8 +34,28 @@ export default function Sub() {
     if (!row.remaning_days) return "table-info";
     return "table-success";
   }
+  async function getAssignedPlan(subId) {
+    try {
+      const { data } = await httpService.get(
+        `/athlete/sub_plan/${subId}/100/1`,
+        authHeader
+      );
+
+      setSubPlan(data);
+    } catch (error) {
+      if (error.response) alert(error.response.data);
+      else alert(error.message);
+    }
+  }
   return (
     <div className="black-mode-wrapper">
+      <AssignedPlansModal
+        show={showSubPlans}
+        setShow={SetShowSubPlans}
+        rows={subPlan}
+        isStaff={false}
+        // title={athleteName}
+      />
       <div className="sub">
         <Table variant="dark" hover>
           <thead>
@@ -74,11 +95,17 @@ export default function Sub() {
                   <td>{row.remaning_days}</td>
                   <td>{row.is_payed ? "yes" : "no"}</td>
                   <td>{row.coach_id ? row.coach_full_name : "not assigned"}</td>
-                  <td>
+                  <td
+                    onClick={() => {
+                      async function onClick() {
+                        await getAssignedPlan(row.sub_id);
+                        SetShowSubPlans(!showSubPlans);
+                      }
+                      onClick();
+                    }}
+                  >
                     {row.sub_type_id === 2 && row.is_payed === 1 && (
-                      <Link className="sub__plan" to={`sub_plan/${row.sub_id}`}>
-                        view coach plans
-                      </Link>
+                      <p className="hyperlink">view coach plans</p>
                     )}
                   </td>
                 </tr>
