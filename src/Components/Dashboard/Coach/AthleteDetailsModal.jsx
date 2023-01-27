@@ -17,7 +17,9 @@ export default function CustomModal({ setShow, show, title, bodyObj }) {
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{body && body.map((p) => <p>{p}</p>)}</Modal.Body>
+        <Modal.Body>
+          {body && body.map((p, index) => <p key={index}>{p}</p>)}
+        </Modal.Body>
       </Modal>
     </div>
   );

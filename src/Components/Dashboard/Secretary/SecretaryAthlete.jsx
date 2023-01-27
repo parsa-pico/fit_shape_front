@@ -5,6 +5,7 @@ import httpService from "../../../Services.js/httpService";
 import { Input } from "../../Common/Inputs";
 import { getBloodType } from "./../../Common/commonFuncs";
 import AthleteDetailsModal from "../Coach/AthleteDetailsModal";
+import cartoonMan from "../../Images/cartoonMan.png";
 export default function SecretaryAthlete() {
   const [athleteName, setAthleteName] = useState("");
   const [athleteDetails, setAthleteDetails] = useState({});
@@ -28,6 +29,7 @@ export default function SecretaryAthlete() {
     }
     onMount();
   }, []);
+  console.log(rows);
   async function handleEdit() {
     try {
       await httpService.put(
@@ -69,7 +71,12 @@ export default function SecretaryAthlete() {
               return (
                 <tr key={index}>
                   <td></td>
-                  <td>{index + 1}</td>
+                  <td>
+                    {index + 1}
+                    {row.is_in_gym && (
+                      <img className="cartoon-man" src={cartoonMan} alt="" />
+                    )}
+                  </td>
                   <td>{row.first_name}</td>
                   <td>{row.last_name}</td>
                   <td

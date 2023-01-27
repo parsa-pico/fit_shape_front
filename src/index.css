@@ -89,7 +89,9 @@ a {
 .mr-1 {
   margin-right: 1rem;
 }
-
+.cartoon-man {
+  max-width: 50px;
+}
 /* typography */
 h1,
 h2,

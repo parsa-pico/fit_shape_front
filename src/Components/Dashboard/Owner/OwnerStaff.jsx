@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Pagination, Table } from "react-bootstrap";
+import { FormCheck, Pagination, Table } from "react-bootstrap";
 import { authHeader } from "../../../Services.js/authService";
 import httpService from "../../../Services.js/httpService";
 import Button from "react-bootstrap/Button";
@@ -73,17 +73,35 @@ export default function OwnerStaff() {
     setUpdateRows(updateRowsCopy);
   }
   function handleChangeSearch(target) {
-    const value = target.value.trim();
-    const searchObjCopy = { ...searchObj };
-    if (value === "") {
-      delete searchObjCopy[target.id];
-      setSearchObj(searchObjCopy);
-    } else
-      setSearchObj((prevState) => ({
-        ...prevState,
-        [target.id]: { like: true, value },
-      }));
+    if (target.type === "checkbox") handleCheckBox(target);
+    else {
+      const value = target.value.trim();
+      const searchObjCopy = { ...searchObj };
+      if (value === "") {
+        delete searchObjCopy[target.id];
+        setSearchObj(searchObjCopy);
+      } else {
+        if (!searchObj[target.id])
+          setSearchObj((prevState) => ({
+            ...prevState,
+            [target.id]: { like: true, value },
+          }));
+        else
+          setSearchObj((prevState) => ({
+            ...prevState,
+            [target.id]: { like: searchObj[target.id].like, value },
+          }));
+      }
+    }
   }
+  function handleCheckBox(target) {
+    const searchObjCopy = { ...searchObj };
+    const obj = { ...searchObj[target.id] };
+    obj.like = !obj.like;
+    searchObjCopy[target.id] = obj;
+    setSearchObj(searchObjCopy);
+  }
+  console.log(searchObj);
   async function handleSearch(e) {
     e.preventDefault();
     try {
@@ -124,28 +142,46 @@ export default function OwnerStaff() {
           onChange={({ target }) => handleChangeSearch(target)}
           className="grid grid--1x5 m-2"
         >
-          <Input
-            className="register-input"
-            // placeholder="first name"
-            id={"first_name"}
-          />
-          <Input
-            className="register-input"
-            // placeholder="last name"
-            id={"last_name"}
-          />
-          <Input
-            className="register-input"
-            // placeholder="national code"
-            id={"national_code"}
-          />
-          <Input
-            className="register-input"
-            // placeholder="phone number"
-            id={"phone_number"}
-          />
-          <Input className="register-input" id={"email"} />
-          <Input className="register-input" id={"city"} />
+          <div>
+            <Input
+              className="register-input"
+              // placeholder="first name"
+              id={"first_name"}
+            />
+            <Form.Check id={"first_name"} label={`exact`} />
+          </div>
+          <div>
+            <Input
+              className="register-input"
+              // placeholder="last name"
+              id={"last_name"}
+            />
+            <Form.Check id={"last_name"} label={`exact`} />
+          </div>
+          <div>
+            <Input
+              className="register-input"
+              // placeholder="national code"
+              id={"national_code"}
+            />
+            <Form.Check id={"national_code"} label={`exact`} />
+          </div>
+          <div>
+            <Input
+              className="register-input"
+              // placeholder="phone number"
+              id={"phone_number"}
+            />
+            <Form.Check id={"phone_number"} label={`exact`} />
+          </div>
+          <div>
+            <Input className="register-input" id={"email"} />
+            <Form.Check id={"email"} label={`exact`} />
+          </div>
+          <div>
+            <Input className="register-input" id={"city"} />
+            <Form.Check id={"city"} label={`exact`} />
+          </div>
           <Button type="submit" className="w-50 ">
             search
           </Button>
@@ -169,7 +205,6 @@ export default function OwnerStaff() {
         </thead>
         <tbody>
           {rows.map((row, index) => {
-            console.log(row.first_name, row.job_position_id);
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
