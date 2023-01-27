@@ -11,7 +11,7 @@ export default function SecretarySubmitEntrance() {
   const [messeageClass, setMessageClass] = useState(
     "alert-danger hidden--0-5s"
   );
-  useEffect(() => {}, [message]);
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -34,6 +34,31 @@ export default function SecretarySubmitEntrance() {
       }, 5000);
     }
   }
+  async function rotateGate() {
+    try {
+      const { data } = await httpService.post("/gate/rotate", {}, authHeader);
+    } catch (error) {
+      if (error.response) setMesseage(error.response.data);
+      else setMesseage(error.message);
+    }
+  }
+  async function turnOnGate() {
+    try {
+      const { data } = await httpService.post("/gate/on", {}, authHeader);
+    } catch (error) {
+      if (error.response) setMesseage(error.response.data);
+      else setMesseage(error.message);
+    }
+  }
+  async function turnOffGate() {
+    try {
+      const { data } = await httpService.post("/gate/off", {}, authHeader);
+    } catch (error) {
+      if (error.response) setMesseage(error.response.data);
+      else setMesseage(error.message);
+    }
+  }
+
   return (
     <div className="submit-entrance">
       <form onSubmit={(e) => handleSubmit(e)} className="submit-entrance__form">
@@ -50,6 +75,20 @@ export default function SecretarySubmitEntrance() {
           <b>{message}</b>
         </div>
       </form>
+      <hr className="w-50" />
+      <Button onClick={() => rotateGate()}>call gate</Button>
+      <hr className="w-50" />
+      <div className="rotate-gate-btn-wrapper">
+        <Button
+          onMouseUp={() => turnOffGate()}
+          onMouseDown={(e) => {
+            console.log(e);
+            turnOnGate();
+          }}
+        >
+          rotate gate
+        </Button>
+      </div>
     </div>
   );
 }
