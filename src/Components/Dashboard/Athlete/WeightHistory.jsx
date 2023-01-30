@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { authHeader } from "../../../Services.js/authService";
 import httpService from "../../../Services.js/httpService";
 import { Input } from "../../Common/Inputs";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 export default function WeightHistory() {
   const [rows, setRows] = useState([]);
   const [addRow, setAddRow] = useState(false);
-  const [newRow, setNewRow] = useState({});
+  const [newRow, setNewRow] = useState({ weight: null, date: new Date() });
   useEffect(() => {
     async function onMount() {
       const { data } = await httpService.get(
@@ -29,8 +30,21 @@ export default function WeightHistory() {
     }
   }
   async function handleAdd() {
+    console.log(newRow);
+    let day = newRow.date.getUTCDate().toString();
+
+    day = day[1] ? day : "0" + day;
+    let month = (newRow.date.getUTCMonth() + 1).toString();
+    month = month[1] ? month : "0" + month;
+    let year = newRow.date.getUTCFullYear().toString();
+    const date = `${year}-${month}-${day}`;
+
     try {
-      await httpService.post(`/athlete/athlete_weight/`, newRow, authHeader);
+      await httpService.post(
+        `/athlete/athlete_weight/`,
+        { weight: newRow.weight, date },
+        authHeader
+      );
       window.location = "/dashboard/weight_history";
     } catch (e) {
       if (e && e.response) return alert(e.response.data);
@@ -70,12 +84,20 @@ export default function WeightHistory() {
             <tr>
               <td>{rows.length + 1}</td>
               <td>
-                <Input
+                {/* <Input
                   onChange={(e) => {
                     setNewRow({ ...newRow, date: e.target.value });
                   }}
                   placeholder=" "
                   className="w-50"
+                /> */}
+                <DatePicker
+                  placeholderText="choose date"
+                  dateFormat="yyyy/MM/dd"
+                  selected={newRow.date}
+                  onChange={(date) => {
+                    setNewRow({ ...newRow, date });
+                  }}
                 />
               </td>
               <td>
