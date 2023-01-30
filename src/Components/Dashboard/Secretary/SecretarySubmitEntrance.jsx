@@ -31,7 +31,7 @@ export default function SecretarySubmitEntrance() {
       setRfidTag("");
       setTimeout(() => {
         setMessageClass("hidden--0-5s");
-      }, 5000);
+      }, 8000);
     }
   }
   async function rotateGate() {

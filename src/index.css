@@ -92,6 +92,10 @@ a {
 .cartoon-man {
   max-width: 50px;
 }
+.center {
+  align-self: center;
+  text-align: center;
+}
 /* typography */
 h1,
 h2,

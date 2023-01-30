@@ -182,7 +182,7 @@ export default function OwnerStaff() {
             <Input className="register-input" id={"city"} />
             <Form.Check id={"city"} label={`exact`} />
           </div>
-          <Button type="submit" className="w-50 ">
+          <Button type="submit" className="w-50 center ">
             search
           </Button>
         </div>

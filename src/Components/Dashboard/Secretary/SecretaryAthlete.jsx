@@ -73,7 +73,7 @@ export default function SecretaryAthlete() {
                   <td></td>
                   <td>
                     {index + 1}
-                    {row.is_in_gym && (
+                    {row.is_in_gym !== 0 && (
                       <img className="cartoon-man" src={cartoonMan} alt="" />
                     )}
                   </td>
