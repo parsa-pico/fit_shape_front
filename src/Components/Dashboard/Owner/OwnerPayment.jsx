@@ -96,10 +96,10 @@ export default function OwnerPayment() {
               return (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{!isLastIndex && row.first_name}</td>
-                  <td>{!isLastIndex && row.last_name}</td>
-                  <td>{!isLastIndex && row.national_code}</td>
-                  <td>{!isLastIndex && row.phone_number}</td>
+                  <td>{row.first_name}</td>
+                  <td>{row.last_name}</td>
+                  <td>{row.national_code}</td>
+                  <td>{row.phone_number}</td>
                   <td>{moneyFormater.format(row.total_payment)}</td>
                 </tr>
               );
