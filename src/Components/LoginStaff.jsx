@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import httpService from "../Services.js/httpService";
 import { Input } from "./Common/Inputs";
-
+import backGround from "./Images/loginBackground.jpg";
 export default function LoginStaff() {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
@@ -32,8 +32,17 @@ export default function LoginStaff() {
     }));
   }
   return (
-    <div className=" login-page">
-      <form className="login-form relative" onSubmit={handleSubmit}>
+    <div className=" login-page login-athlete">
+      <img
+        className="login-athlete__background"
+        src={backGround}
+        alt=""
+        srcset=""
+      />
+      <form
+        className="login-form login-from--withbg relative"
+        onSubmit={handleSubmit}
+      >
         <h3>sign in for staff</h3>
         <div onChange={handleUserInfo}>
           <Input className="login-input " placeholder="email" id={"email"} />

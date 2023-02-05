@@ -159,20 +159,40 @@ h5 {
 }
 .register-input {
 }
+
 /* login page */
+.login-athlete {
+  position: relative;
+  height: 100vh;
+}
+.login-athlete__background {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
 .login-page {
   display: flex;
-
   align-items: center;
   justify-content: center;
   width: 100%;
 }
+
 .login-form {
   padding: 5rem 3rem;
   border-radius: 40px;
   border: 1px solid #dadce0;
   max-width: 700px;
   text-align: center;
+}
+.login-from--withbg {
+  background-color: whitesmoke;
+  box-shadow: 0px 0px 20px 3px black;
 }
 .login-input {
   margin: 2rem 0;

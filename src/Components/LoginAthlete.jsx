@@ -3,6 +3,7 @@ import httpService from "../Services.js/httpService";
 import { Input } from "./Common/Inputs";
 import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
+import backGround from "./Images/loginBackground.jpg";
 export default function LoginAthlete() {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
@@ -33,8 +34,17 @@ export default function LoginAthlete() {
     }));
   }
   return (
-    <div className="login-page">
-      <form className="login-form  relative" onSubmit={handleSubmit}>
+    <div className="login-page login-athlete">
+      <img
+        className="login-athlete__background"
+        src={backGround}
+        alt=""
+        srcset=""
+      />
+      <form
+        className="login-form login-from--withbg  relative"
+        onSubmit={handleSubmit}
+      >
         <h3>sign in</h3>
         <div onChange={handleUserInfo}>
           <Input className="login-input" placeholder="email" id={"email"} />
