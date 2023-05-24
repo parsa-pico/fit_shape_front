@@ -114,6 +114,8 @@ export default function SecretaryAthlete() {
                             background: "#212529",
                             color: "white",
                             resize: "none",
+                            color: "transparent",
+                            textShadow: "0 0 8px white",
                           }}
                           defaultValue={row.rfid_tag}
                           className="form-contorl no-border "
@@ -138,8 +140,10 @@ export default function SecretaryAthlete() {
                           value={editRfidTag}
                           style={{
                             background: "#212529",
-                            color: "white",
+
                             resize: "none",
+                            color: "transparent",
+                            textShadow: "0 0 8px white",
                           }}
                           className="form-contorl no-border "
                           cols="25"

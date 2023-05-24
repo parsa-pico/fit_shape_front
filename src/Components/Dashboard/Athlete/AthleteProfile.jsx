@@ -6,9 +6,11 @@ import httpService from "../../../Services.js/httpService";
 import { Input } from "../../Common/Inputs";
 
 export default function AthleteProfile({ athlete }) {
+  const avatarApi = `${process.env.REACT_APP_API_URL}/athlete/avatar`;
   const [user, setUser] = useState();
   const [genericError, setGenericError] = useState(null);
   const [errors, setErrors] = useState({});
+  const [newAvatar, setNewAvatar] = useState();
   useEffect(() => {
     const {
       athlete_id,
@@ -25,7 +27,14 @@ export default function AthleteProfile({ athlete }) {
     e.preventDefault();
 
     try {
-      await httpService.put("/athlete", user, authHeader);
+      const { avatar, ...rest } = user;
+      console.log(rest);
+      await httpService.put("/athlete", rest, authHeader);
+      if (newAvatar) {
+        const fd = new FormData();
+        fd.append("avatar", newAvatar, newAvatar.name);
+        await httpService.post("/athlete/avatar", fd, authHeader);
+      }
       setGenericError(null);
       clearToken();
       window.location = "/login/athlete";
@@ -36,6 +45,7 @@ export default function AthleteProfile({ athlete }) {
   };
 
   function handleUserInfo({ target }) {
+    if (target.type === "file") return;
     const value = target.value.trim();
     setUser((prevState) => ({
       ...prevState,
@@ -46,7 +56,23 @@ export default function AthleteProfile({ athlete }) {
   return (
     <div className="container register-page">
       <form className="register-form" onSubmit={handleSubmit}>
+        {user && user.avatar && (
+          <img
+            src={avatarApi + "/" + user.avatar}
+            className="img-fluid w-25"
+            alt=""
+          />
+        )}
         <div onChange={handleUserInfo} className="grid grid--1x2">
+          <Input
+            type="file"
+            name="avatar"
+            onChange={(e) => {
+              if (e.target.files) {
+                setNewAvatar(e.target.files[0]);
+              }
+            }}
+          />
           <Input
             defaultValue={athlete.national_code}
             className="register-input"

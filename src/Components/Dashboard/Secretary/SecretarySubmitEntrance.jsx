@@ -75,7 +75,7 @@ export default function SecretarySubmitEntrance() {
           <b>{message}</b>
         </div>
       </form>
-      <hr className="w-50" />
+      {/* <hr className="w-50" />
       <Button onClick={() => rotateGate()}>call gate</Button>
       <hr className="w-50" />
       <div className="rotate-gate-btn-wrapper">
@@ -88,7 +88,7 @@ export default function SecretarySubmitEntrance() {
         >
           rotate gate
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }

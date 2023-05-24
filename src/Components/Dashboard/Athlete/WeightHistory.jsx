@@ -30,7 +30,6 @@ export default function WeightHistory() {
     }
   }
   async function handleAdd() {
-    console.log(newRow);
     let day = newRow.date.getUTCDate().toString();
 
     day = day[1] ? day : "0" + day;

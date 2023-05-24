@@ -9,12 +9,15 @@ import RegisterStaff from "./Components/RegisterStaff";
 import LoginStaff from "./Components/LoginStaff";
 import AthleteVerification from "./Components/AthleteVerification";
 import AthleteAfterRegister from "./Components/AthleteAfterRegister";
+import SocketTest from "./Components/SocketTest";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Navigate to={"/login/athlete"} />} />
+        <Route path="/socket" element={<SocketTest />} />
+
         <Route path="/register/athlete" element={<RegisterAthlete />} />
         <Route
           path="/register/athlete/verify/:athlete_id"
